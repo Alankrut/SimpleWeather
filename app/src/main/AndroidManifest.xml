@@ -2,6 +2,9 @@
 <manifest package="com.systemxstudios.weather"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Awareness Weather Needs Location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -17,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Awareness API -->
+        <meta-data
+            android:name="com.google.android.awareness.API_KEY"
+            android:value="@string/secret_key_google_api"/>
     </application>
 
 </manifest>
