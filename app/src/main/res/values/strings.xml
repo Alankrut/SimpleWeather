@@ -2,6 +2,7 @@
     <string name="app_name">Simple Weather</string>
 
     <!-- Weather Prompts -->
+    <string name="text_weather_conditions">Condition(s): %1$s</string>
     <string name="text_weather_temperature">Temperature: %1$.1f °F</string>
     <string name="text_weather_temperature_feels">Feels Like: %1$.1f °F</string>
     <string name="text_weather_humidity">Humidity: %1$d%%</string>

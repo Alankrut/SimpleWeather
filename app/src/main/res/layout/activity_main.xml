@@ -22,6 +22,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/main_text_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="310dp"
+            tools:layout_editor_absoluteY="16dp"/>
+
+        <TextView
             android:id="@+id/main_text_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,20 +46,20 @@
             tools:layout_editor_absoluteY="273dp"/>
 
         <TextView
-            android:id="@+id/main_text_humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="310dp"
-            tools:layout_editor_absoluteY="43dp"/>
-
-        <TextView
             android:id="@+id/main_text_dew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             tools:layout_editor_absoluteX="310dp"
             tools:layout_editor_absoluteY="16dp"/>
+
+        <TextView
+            android:id="@+id/main_text_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="310dp"
+            tools:layout_editor_absoluteY="43dp"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +15,7 @@ import com.google.android.gms.awareness.snapshot.WeatherResult;
 import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.systemxstudios.data.WeatherConditionFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R2.id.main_text_conditions) TextView tvConditions;
     @BindView(R2.id.main_text_temp) TextView tvTemperature;
     @BindView(R2.id.main_text_temp_feel) TextView tvTempFeelsLike;
     @BindView(R2.id.main_text_dew) TextView tvDewPoint;
@@ -91,6 +92,26 @@ public class MainActivity extends AppCompatActivity {
         tvTempFeelsLike.setText(getString(R.string.text_weather_temperature_feels, currWeather.getFeelsLikeTemperature(UNITS_TEMPERATURE)));
         tvDewPoint.setText(getString(R.string.text_weather_dew_point, currWeather.getDewPoint(UNITS_TEMPERATURE)));
         tvHumidity.setText(getString(R.string.text_weather_humidity, currWeather.getHumidity()));
+
+        // Resolve conditions array into readable conditions text
+        String txtConditions = createConditionsString(currWeather.getConditions());
+        tvConditions.setText(getString(R.string.text_weather_conditions, txtConditions));
+    }
+
+    /**
+     * Given the array of conditions, this will resolve them into actual condition text using the WeatherConditionFactory
+     *
+     * @param arrConditions Array of Condition IDs from Awareness API
+     * @return Output string with readable condition texts
+     */
+    public String createConditionsString(int[] arrConditions) {
+        StringBuilder strBuilderConditions = new StringBuilder();
+        for (int conditionID : arrConditions) {
+            String conditionText = WeatherConditionFactory.getWeatherCondition(conditionID).getText();
+            strBuilderConditions.append(conditionText);
+            strBuilderConditions.append(",");
+        }
+        return strBuilderConditions.toString().replaceAll(",$", "");
     }
 
     @Override
@@ -111,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Inner class used for the weather result callback from Snapshot api. Once this gets called, the mainActivity views will get updated
+     */
     class WeatherResultCallback implements ResultCallback<WeatherResult> {
         Weather currentWeather;
 
