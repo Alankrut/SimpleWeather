@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +23,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    final private int REQUEST_PERMISSION_LOCATION = 123;
-    private final String TAG = getClass().getSimpleName();
+    @BindView(R2.id.main_text_temp) TextView tvTemperature;
+    @BindView(R2.id.main_text_temp_feel) TextView tvTempFeelsLike;
+    @BindView(R2.id.main_text_dew) TextView tvDewPoint;
+    @BindView(R2.id.main_text_humidity) TextView tvHumidity;
 
-    @BindView(R2.id.main_text) TextView tvMain;
+    private final String TAG = getClass().getSimpleName();
+    final private int REQUEST_PERMISSION_LOCATION = 123;
+    private static final int UNITS_TEMPERATURE = Weather.FAHRENHEIT;
 
     /**
      * Overriding the system baseContext in order to use custom fonts. Done so by wrapping the
@@ -78,10 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Sets the weather data to the views
+     *
      * @param currWeather Weather for the current location
      */
     private void setWeatherData(Weather currWeather) {
-        tvMain.setText(String.valueOf(currWeather.getTemperature(Weather.FAHRENHEIT)));
+        tvTemperature.setText(getString(R.string.text_weather_temperature, currWeather.getTemperature(UNITS_TEMPERATURE)));
+        tvTempFeelsLike.setText(getString(R.string.text_weather_temperature_feels, currWeather.getFeelsLikeTemperature(UNITS_TEMPERATURE)));
+        tvDewPoint.setText(getString(R.string.text_weather_dew_point, currWeather.getDewPoint(UNITS_TEMPERATURE)));
+        tvHumidity.setText(getString(R.string.text_weather_humidity, currWeather.getHumidity()));
     }
 
     @Override
