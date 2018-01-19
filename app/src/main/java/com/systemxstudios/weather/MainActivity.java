@@ -3,10 +3,12 @@ package com.systemxstudios.weather;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.google.android.gms.awareness.snapshot.WeatherResult;
 import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.systemxstudios.data.WeatherCondition;
 import com.systemxstudios.data.WeatherConditionFactory;
 
 import butterknife.BindView;
@@ -23,6 +26,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R2.id.main_icon_condition) ImageView ivCondition;
     @BindView(R2.id.main_text_conditions) TextView tvConditions;
     @BindView(R2.id.main_text_temp) TextView tvTemperature;
     @BindView(R2.id.main_text_temp_feel) TextView tvTempFeelsLike;
@@ -107,9 +111,14 @@ public class MainActivity extends AppCompatActivity {
     public String createConditionsString(int[] arrConditions) {
         StringBuilder strBuilderConditions = new StringBuilder();
         for (int conditionID : arrConditions) {
-            String conditionText = WeatherConditionFactory.getWeatherCondition(conditionID).getText();
+            WeatherCondition currCondition = WeatherConditionFactory.getWeatherCondition(conditionID);
+            String conditionText = currCondition.getText();
             strBuilderConditions.append(conditionText);
             strBuilderConditions.append(",");
+
+            // Get the drawable resource for the condition icon, set it to the imageView
+            int conditionResDrawable = currCondition.getIcon();
+            ivCondition.setImageDrawable(getResources().getDrawable(conditionResDrawable));
         }
         return strBuilderConditions.toString().replaceAll(",$", "");
     }

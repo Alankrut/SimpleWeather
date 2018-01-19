@@ -1,5 +1,7 @@
 package com.systemxstudios.data;
 
+import com.systemxstudios.weather.R;
+
 /**
  * Factory class to create WeatherCondition objects
  */
@@ -29,34 +31,34 @@ public class WeatherConditionFactory {
         switch (id) {
             default:
             case CONDITION_UNKNOWN:
-                condition = new WeatherCondition(id, "Unknown", "path_to_icon");
+                condition = new WeatherCondition(id, "Unknown", R.drawable.ic_launcher_background);
                 break;
             case CONDITION_CLEAR:
-                condition = new WeatherCondition(id, "Clear", "path_to_icon");
+                condition = new WeatherCondition(id, "Clear", R.drawable.ic_condition_clear);
                 break;
             case CONDITION_CLOUDY:
-                condition = new WeatherCondition(id, "Cloudy", "path_to_icon");
+                condition = new WeatherCondition(id, "Cloudy", R.drawable.ic_condition_cloudy);
                 break;
             case CONDITION_FOGGY:
-                condition = new WeatherCondition(id, "Foggy", "path_to_icon");
+                condition = new WeatherCondition(id, "Foggy", R.drawable.ic_launcher_background);
                 break;
             case CONDITION_HAZY:
-                condition = new WeatherCondition(id, "Hazy", "path_to_icon");
+                condition = new WeatherCondition(id, "Hazy", R.drawable.ic_launcher_background);
                 break;
             case CONDITION_ICY:
-                condition = new WeatherCondition(id, "Icy", "path_to_icon");
+                condition = new WeatherCondition(id, "Icy", R.drawable.ic_launcher_background);
                 break;
             case CONDITION_RAINY:
-                condition = new WeatherCondition(id, "Rainy", "path_to_icon");
+                condition = new WeatherCondition(id, "Rainy", R.drawable.ic_condition_rainy);
                 break;
             case CONDITION_SNOWY:
-                condition = new WeatherCondition(id, "Snowy", "path_to_icon");
+                condition = new WeatherCondition(id, "Snowy", R.drawable.ic_condition_snowy);
                 break;
             case CONDITION_STORMY:
-                condition = new WeatherCondition(id, "Stormy", "path_to_icon");
+                condition = new WeatherCondition(id, "Stormy", R.drawable.ic_condition_stormy);
                 break;
             case CONDITION_WINDY:
-                condition = new WeatherCondition(id, "Windy", "path_to_icon");
+                condition = new WeatherCondition(id, "Windy", R.drawable.ic_launcher_background);
                 break;
         }
 
