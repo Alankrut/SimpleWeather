@@ -110,16 +110,25 @@ public class MainActivity extends AppCompatActivity {
      */
     public String createConditionsString(int[] arrConditions) {
         StringBuilder strBuilderConditions = new StringBuilder();
+        int conditionResDrawable = -1;
+
         for (int conditionID : arrConditions) {
             WeatherCondition currCondition = WeatherConditionFactory.getWeatherCondition(conditionID);
             String conditionText = currCondition.getText();
             strBuilderConditions.append(conditionText);
             strBuilderConditions.append(",");
 
-            // Get the drawable resource for the condition icon, set it to the imageView
-            int conditionResDrawable = currCondition.getIcon();
+            // Get the drawable resource for the condition icon, only do this if this is the first condition in the list
+            if (conditionResDrawable == -1) {
+                conditionResDrawable = currCondition.getIcon();
+            }
+        }
+        // Get the condition resource drawable to the imageView
+        if(conditionResDrawable != -1) {
             ivCondition.setImageDrawable(getResources().getDrawable(conditionResDrawable));
         }
+
+        // Remove the comma at the end of the list of conditions
         return strBuilderConditions.toString().replaceAll(",$", "");
     }
 
